@@ -1,0 +1,35 @@
+[
+  {
+    "name": ":fishing_pole_and_fish: Fishing Rod",
+    "description": "A fishing rod",
+    "note": "Has a chance of breaking while fishing",
+    "type": "tool",
+    "sellable": true,
+    "buyable": true,
+    "usable": false,
+    "price": 70,
+    "usage": "reusable",
+    "id": "fishingrod"
+  },
+  {
+    "name": "Placeholder",
+    "description": "A placeholder item",
+    "type": "tool",
+    "sellable": false,
+    "buyable": false,
+    "usable": true,
+    "usage": "reusable",
+    "id": "placeholder"
+  },
+  {
+    "name": "Chicken",
+    "description": "Grants 1.2x bobbucks",
+    "type": "pet",
+    "sellable": false,
+    "buyable": true,
+    "usable": true,
+    "price": 100,
+    "usage": "consumable",
+    "id": "chicken"
+  }
+]

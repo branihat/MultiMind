@@ -1,0 +1,4 @@
+{
+  "*": "prettier --ignore-unknown --write apps/**/src/**/*",
+  "**/src/**.{ts,js}": "./node_modules/.bin/eslint --ext ts,js --fix"
+}

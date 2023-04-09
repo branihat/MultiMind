@@ -1,0 +1,5 @@
+*.md
+LICENSE
+resources/**
+!resources/*.json
+dist/**

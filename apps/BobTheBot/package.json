@@ -1,0 +1,39 @@
+{
+  "name": "bobthebot",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node dist/index.js",
+    "deploy": "node dist/deploy.js",
+    "build:clean": "del-cli dist",
+    "build:ts": "tsc",
+    "build": "npm run build:clean && npm run build:ts",
+    "dev": "npm run build && npm run deploy && npm run start",
+    "fix": "npm run lint:fix && npm run format",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write ."
+  },
+  "type": "module",
+  "author": "Tetie#4242",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@types/node-cron": "^3.0.7",
+    "discord.js": "^14.8.0",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.0.0",
+    "ms": "^3.0.0-canary.1",
+    "node-cron": "^3.0.2",
+    "pino": "^8.11.0",
+    "pino-pretty": "^10.0.0",
+    "readdirp": "^3.6.0"
+  },
+  "devDependencies": {
+    "del-cli": "^5.0.0",
+    "eslint": "^8.35.0",
+    "prettier": "^2.8.4"
+  },
+  "engines": {
+    "node": ">=16.9.0"
+  }
+}

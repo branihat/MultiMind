@@ -1,0 +1,25 @@
+{
+  "cmd": {
+    "prefix": ["ChatInput", "cmd", "command", "slashcommand", "slash"],
+    "description": "Creates a ChatInput command",
+    "body": [
+      "import type { ChatInputCommandInteraction } from \"discord.js\";",
+      "import { permissionToString, type ChatInputCommand } from \"../../utils/index.js\";",
+      "",
+      "export const RequiredPerms = {",
+      "  bot: [],",
+      "  user: [],",
+      "} as const;",
+      "",
+      "export const PlaceholderCommand: ChatInputCommand = {",
+      "  name: \"placeholder\",",
+      "  description: \"placeholder\",",
+      "  default_member_permissions: permissionToString(RequiredPerms.user),",
+      "  dm_permission: true,",
+      "} as const;",
+      "",
+      "export async function execute(interaction: ChatInputCommandInteraction) {}",
+      ""
+    ]
+  }
+}

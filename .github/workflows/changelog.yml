@@ -1,0 +1,48 @@
+name: Changelogger
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/BobTheBot/src/**"
+
+jobs:
+  update_changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: jitterbit/get-changed-files@v1
+        id: changed-files
+        with:
+          format: space-delimited
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Process commit
+        id: process-commit
+        run: node .github/workflows/scripts/processCommit.js "${{ github.event.head_commit.message }}"
+
+      - name: Check for invalid
+        id: check-invalid-commit
+        if: steps.process-commit.outputs.commit == 'Invalid' || steps.process-commit.outputs.commit == 'Failed'
+        run: |
+          echo "Commit message is invalid or failed to process"
+          exit 1
+
+      - name: Check for important
+        id: check-important-commit
+        if: steps.process-commit.outputs.commit == 'Not important'
+        run: |
+          echo "Commit is not flagged as important, skipping changelog update"
+          exit 0
+
+      - name: Update changelog
+        if: steps.process-commit.outputs.commit == 'Important'
+        run: node .github/workflows/scripts/updateChangelog.js "${{ github.event.head_commit.message }}" "${{ github.event.head_commit.description }}" "${{ steps.changed-files.outputs.added }}" "${{ steps.changed-files.outputs.removed }}" "${{ steps.changed-files.outputs.modified }}" "${{ steps.changed-files.outputs.renamed }}"
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "💡 docs(Changelog): add changelog data"
+          file_pattern: "CHANGELOG.md"
+          commit_user_name: "Changelogger Action"
